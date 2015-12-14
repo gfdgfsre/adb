@@ -1,0 +1,12 @@
+Index: b/extras/ext4_utils/make_ext4fs_main.c
+===================================================================
+--- a/extras/ext4_utils/make_ext4fs_main.c
++++ b/extras/ext4_utils/make_ext4fs_main.c
+@@ -46,6 +46,7 @@ struct selabel_handle;
+ 
+ extern struct fs_info info;
+ 
++extern struct selabel_handle* selinux_android_file_context_handle(void);
+ 
+ static void usage(char *path)
+ {
