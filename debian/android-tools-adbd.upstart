@@ -23,7 +23,8 @@ pre-start script
                         # some devices use the functionfs (i.e. manta)
                         # we need to mount it to keep adb working
                         mkdir -p /dev/usb-ffs/adb
-                        mount -t functionfs adb /dev/usb-ffs/adb || true
+                        chown phablet:phablet -R /dev/usb-ffs
+                        mount -o uid=32011,gid=32011 -t functionfs adb /dev/usb-ffs/adb || true
                 fi
         fi
         else

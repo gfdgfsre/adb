@@ -33,6 +33,7 @@ override_dh_install:
 	dh_install --sourcedir=.
 	$(INSTALL_PROGRAM) core/libsparse/simg_dump.py debian/android-tools-fsutils/usr/bin/simg_dump
 	$(INSTALL_PROGRAM) extras/ext4_utils/mkuserimg.sh debian/android-tools-fsutils/usr/bin/mkuserimg
+	$(INSTALL_PROGRAM) extras/ext4_utils/mkubuntuimg.sh debian/android-tools-fsutils/usr/bin/mkubuntuimg
 
 override_dh_installudev:
 	dh_installudev -p android-tools-adb --priority=70

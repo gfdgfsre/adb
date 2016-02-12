@@ -1,15 +1,14 @@
-# Makefile for fastboot; from https://heiher.info/2227.html
+# Makefile for fastboot; based on core/fastboot/Android.mk
 
-SRCS+= bootimg.c
-SRCS+= engine.c
-SRCS+= fastboot.c
+VPATH+= ../fastboot
 SRCS+= protocol.c
+SRCS+= engine.c
+SRCS+= bootimg.c
+SRCS+= fastboot.c
+SRCS+= util.c
+SRCS+= fs.c
 SRCS+= usb_linux.c
 SRCS+= util_linux.c
-
-VPATH+= ../libzipfile
-SRCS+= centraldir.c
-SRCS+= zipfile.c
 
 VPATH+= ../libsparse
 SRCS+= backed_block.c
@@ -21,23 +20,41 @@ SRCS+= output_file.c
 
 VPATH+= ../../extras/ext4_utils/
 SRCS+= make_ext4fs.c
-SRCS+= crc16.c
+SRCS+= ext4fixup.c
 SRCS+= ext4_utils.c
-SRCS+= indirect.c
 SRCS+= allocate.c
 SRCS+= contents.c
-SRCS+= uuid.c
 SRCS+= extent.c
-SRCS+= wipe.c
+SRCS+= indirect.c
+SRCS+= uuid.c
 SRCS+= sha1.c
+SRCS+= wipe.c
+SRCS+= crc16.c
+SRCS+= ext4_sb.c
 
+VPATH+= ../../extras/f2fs_utils/
+SRCS+= f2fs_utils.c
+SRCS+= f2fs_ioutils.c
+SRCS+= f2fs_dlutils.c
+
+VPATH+= ../libzipfile
+SRCS+= zipfile.c
+SRCS+= centraldir.c
+
+CPPFLAGS+= -DANDROID
+CPPFLAGS+= -DHOST=1
+CPPFLAGS+= -D_FILE_OFFSET_BITS=64
+CPPFLAGS+= -std=gnu99
 CPPFLAGS+= -I.
+CPPFLAGS+= -I/usr/include
+CPPFLAGS+= -I../fastboot
 CPPFLAGS+= -I../include
 CPPFLAGS+= -I../mkbootimg
 CPPFLAGS+= -I../../extras/ext4_utils/
+CPPFLAGS+= -I../../extras/f2fs_utils
+CPPFLAGS+= -I../include/f2fs-tools
 CPPFLAGS+= -I../libsparse/include/
-
-LIBS+= -lz -lselinux
+LIBS+= -lz -ldl -lselinux
 
 OBJS= $(SRCS:.c=.o)
 

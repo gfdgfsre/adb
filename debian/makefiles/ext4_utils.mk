@@ -12,8 +12,10 @@ SRCS+=uuid.c
 SRCS+=sha1.c
 SRCS+=wipe.c
 SRCS+=crc16.c
+SRCS+=ext4_sb.c
+SRCS+=canned_fs_config.c
 
-VPATH+=../../core/libsparse
+VPATH+= ../../core/libsparse
 SRCS+= backed_block.c
 SRCS+= sparse_crc32.c
 SRCS+= sparse.c
@@ -31,7 +33,9 @@ SRCS+=img2simg.c
 SRCS+=simg2img.c
 SRCS+=simg2simg.c
 
-CPPFLAGS+= -I.
+CPPFLAGS+= -DANDROID
+CPPFLAGS+= -DHOST=1
+CPPFLAGS+= -I../../extras/ext4_utils/
 CPPFLAGS+= -I/usr/include
 CPPFLAGS+= -I../../core/include
 CPPFLAGS+= -I../../core/libsparse/include/
