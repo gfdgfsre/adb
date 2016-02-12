@@ -1,0 +1,50 @@
+From 725d31acdaa8042f90154baa1a9d8a798ee2e42f Mon Sep 17 00:00:00 2001
+From: Simon Fels <simon.fels@canonical.com>
+Date: Fri, 12 Feb 2016 08:01:32 +0100
+Subject: [PATCH] core: adb: add vendor ids for bq and meizu
+
+---
+ core/adb/usb_vendors.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/core/adb/usb_vendors.c b/core/adb/usb_vendors.c
+index 19bcae4..7142018 100755
+--- a/core/adb/usb_vendors.c
++++ b/core/adb/usb_vendors.c
+@@ -53,6 +53,8 @@
+ #define VENDOR_ID_ASUS          0x0b05
+ // BYD's USB Vendor ID
+ #define VENDOR_ID_BYD           0x1D91
++// BQ's USB Vendor ID
++#define VENDOR_ID_BQ            0x2a47
+ // Compal's USB Vendor ID
+ #define VENDOR_ID_COMPAL        0x04B7
+ // Compalcomm's USB Vendor ID
+@@ -121,6 +123,8 @@
+ #define VENDOR_ID_LGE           0x1004
+ // Lumigon's USB Vendor ID
+ #define VENDOR_ID_LUMIGON       0x25E3
++// Meizu's USB Vendor ID
++#define VENDOR_ID_MEIZU         0x2a45
+ // Motorola's USB Vendor ID
+ #define VENDOR_ID_MOTOROLA      0x22b8
+ // MSI's USB Vendor ID
+@@ -207,6 +211,7 @@ int builtInVendorIds[] = {
+     VENDOR_ID_ARCHOS,
+     VENDOR_ID_ASUS,
+     VENDOR_ID_BYD,
++    VENDOR_ID_BQ,
+     VENDOR_ID_COMPAL,
+     VENDOR_ID_COMPALCOMM,
+     VENDOR_ID_DELL,
+@@ -241,6 +246,7 @@ int builtInVendorIds[] = {
+     VENDOR_ID_LENOVOMOBILE,
+     VENDOR_ID_LGE,
+     VENDOR_ID_LUMIGON,
++    VENDOR_ID_MEIZU,
+     VENDOR_ID_MOTOROLA,
+     VENDOR_ID_MSI,
+     VENDOR_ID_MTK,
+-- 
+2.5.0
+
