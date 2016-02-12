@@ -17,6 +17,8 @@ Build-Depends: debhelper (>= 9),
                bash-completion
 Standards-Version: 3.9.3
 Homepage: http://developer.android.com/guide/developing/tools/adb.html
+Vcs-Git: https://git.launchpad.net/~phablet-team/+git/android-tools
+Vcs-Browse: https://code.launchpad.net/~phablet-team/+git/android-tools
 
 Package: android-tools-adb
 # requires porting of selinux calls in extras/ext4_utils and
