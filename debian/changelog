@@ -1,3 +1,11 @@
+android-tools (5.1.1r34+git20160211-0ubuntu2) UNRELEASED; urgency=medium
+
+  * debian/control:
+    - limit libhybris-dev dependency for i386, amd64 and armhf
+    - add link to our vcs system we're now using
+
+ -- Simon Fels <simon.fels@canonical.com>  Fri, 12 Feb 2016 10:30:49 +0100
+
 android-tools (5.1.1r34+git20160211-0ubuntu1) xenial; urgency=medium
 
   * Imported Upstream version 5.1.1r34+git20160211
