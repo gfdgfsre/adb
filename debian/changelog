@@ -1,4 +1,4 @@
-android-tools (5.1.1r34+git20160211-0ubuntu2) UNRELEASED; urgency=medium
+android-tools (5.1.1r34+git20160211-0ubuntu2) xenial; urgency=medium
 
   * debian/control:
     - limit libhybris-dev dependency for i386, amd64 and armhf
