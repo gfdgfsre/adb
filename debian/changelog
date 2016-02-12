@@ -1,3 +1,10 @@
+android-tools (5.1.1r34+git20160211-0ubuntu3) UNRELEASED; urgency=medium
+
+  * debian/rules:
+    - don't build adbd on arm64 and ppc64el
+
+ -- Simon Fels <simon.fels@canonical.com>  Fri, 12 Feb 2016 10:56:56 +0100
+
 android-tools (5.1.1r34+git20160211-0ubuntu2) xenial; urgency=medium
 
   * debian/control:
