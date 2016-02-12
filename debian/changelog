@@ -1,3 +1,12 @@
+android-tools (5.1.1r34+git20160211-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Imported Upstream version 5.1.1r34+git20160211
+  * debian: update patches after new upstream release
+  * debian: add new patch to get 5.1.1 properly working
+  * debian: various fixes and tweaks
+
+ -- Simon Fels <simon.fels@canonical.com>  Fri, 12 Feb 2016 09:51:43 +0100
+
 android-tools (4.2.2+git20130218-3ubuntu43) xenial; urgency=high
 
   * Skip adbd build on s390x (similar to what was done for powerpc), ftbfs
