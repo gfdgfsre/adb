@@ -1,4 +1,4 @@
-android-tools (5.1.1r34+git20160211-0ubuntu1) UNRELEASED; urgency=medium
+android-tools (5.1.1r34+git20160211-0ubuntu1) xenial; urgency=medium
 
   * Imported Upstream version 5.1.1r34+git20160211
   * debian: update patches after new upstream release
