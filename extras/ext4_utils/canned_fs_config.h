@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 The Android Open Source Project
+ * Copyright (C) 2014 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-#ifndef _CUTILS_TZTIME_H
-#define _CUTILS_TZTIME_H
+#ifndef _CANNED_FS_CONFIG_H
+#define _CANNED_FS_CONFIG_H
 
-// TODO: fix both callers to just include <bionic_time.h> themselves.
-#include <bionic_time.h>
+#include <inttypes.h>
 
-#endif /* __CUTILS_TZTIME_H */ 
+int load_canned_fs_config(const char* fn);
+void canned_fs_config(const char* path, int dir,
+                      unsigned* uid, unsigned* gid, unsigned* mode, uint64_t* capabilities);
 
+#endif
