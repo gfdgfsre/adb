@@ -15,7 +15,7 @@ INSTALL_PROGRAM = $(INSTALL)
 override_dh_clean:
 	dh_clean
 	$(MAKE) -f $(M)/adb.mk -C core/adb clean
-ifeq (,$(filter $(DEB_HOST_ARCH),powerpc s390x))
+ifeq (,$(filter $(DEB_HOST_ARCH),powerpc s390x arm64 ppc64el))
 		$(MAKE) -f $(M)/adbd.mk -C core/adbd clean
 endif
 	$(MAKE) -f $(M)/fastboot.mk -C core/fastboot clean
@@ -23,7 +23,7 @@ endif
 
 override_dh_auto_build:
 	$(MAKE) -f $(M)/adb.mk -C core/adb
-ifeq (,$(filter $(DEB_HOST_ARCH),powerpc s390x))
+ifeq (,$(filter $(DEB_HOST_ARCH),powerpc s390x arm64 ppc64el))
 	$(MAKE) -f $(M)/adbd.mk -C core/adbd
 endif
 	$(MAKE) -f $(M)/fastboot.mk -C core/fastboot
