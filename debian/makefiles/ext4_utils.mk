@@ -39,6 +39,7 @@ CPPFLAGS+= -I../../extras/ext4_utils/
 CPPFLAGS+= -I/usr/include
 CPPFLAGS+= -I../include
 CPPFLAGS+= -I../libsparse/include/
+CPPFLAGS+= -I../ubuntu
 
 LIBS+= -lz -lselinux
 

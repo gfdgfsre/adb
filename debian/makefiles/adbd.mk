@@ -31,6 +31,9 @@ SRCS+= rsa.c
 SRCS+= sha.c
 SRCS+= sha256.c
 
+VPATH+= ../ubuntu
+SRCS+= selinux_stub.c
+
 CPPFLAGS+= -O2 -g -Wall -Wno-unused-parameter
 CPPFLAGS+= -DADB_HOST=0 -DHAVE_FORKEXEC=1 -D_XOPEN_SOURCE -D_GNU_SOURCE -DALLOW_ADBD_ROOT=1
 CPPFLAGS+= -DHAVE_SYMLINKS
@@ -38,6 +41,7 @@ CPPFLAGS+= -DHAVE_TERMIO_H
 CPPFLAGS+= -I.
 CPPFLAGS+= -I../adb
 CPPFLAGS+= -I../include
+CPPFLAGS+= -I../ubuntu
 CPPFLAGS+= -I../../../external/zlib
 CPPFLAGS+= `pkg-config --cflags glib-2.0 gio-2.0`
 
