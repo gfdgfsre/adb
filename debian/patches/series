@@ -1,7 +1,0 @@
-remove-selinux-android.patch
-add_adbd.patch
-enable-emulator.patch
-ppc64el-ftbfs.patch
-0001-core-adb-add-vendor-ids-for-bq-and-meizu.patch
-fix-implicit-pointer-conversion.diff
-0001-core-extras-necessary-changes-to-get-5.1.1-properly-.patch

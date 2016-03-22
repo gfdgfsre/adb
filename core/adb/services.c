@@ -20,6 +20,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <pwd.h>
 
 #include "sysdeps.h"
 
@@ -199,11 +200,11 @@ static void init_subproc_child()
     }
 }
 
-static int create_subproc_pty(const char *cmd, const char *arg0, const char *arg1, pid_t *pid)
+static int create_subproc_pty(const char *cmd, const char *arg0, const char *arg1, const char *arg2, const char *arg3,  const char *arg4, pid_t *pid)
 {
-    D("create_subproc_pty(cmd=%s, arg0=%s, arg1=%s)\n", cmd, arg0, arg1);
+    D("create_subproc_pty(cmd=%s, arg0=%s, arg1=%s, arg2=%s, arg3=%s, arg4=%s)\n", cmd, arg0, arg1, arg2, arg3, arg4);
 #ifdef HAVE_WIN32_PROC
-    fprintf(stderr, "error: create_subproc_pty not implemented on Win32 (%s %s %s)\n", cmd, arg0, arg1);
+    fprintf(stderr, "error: create_subproc_pty not implemented on Win32 (%s %s %s %s %s %s)\n", cmd, arg0, arg1, arg2, arg3, arg4);
     return -1;
 #else /* !HAVE_WIN32_PROC */
     int ptm;
@@ -244,7 +245,7 @@ static int create_subproc_pty(const char *cmd, const char *arg0, const char *arg
         adb_close(pts);
         adb_close(ptm);
 
-        execl(cmd, cmd, arg0, arg1, NULL);
+        execl(cmd, cmd, arg0, arg1, arg2, arg3, arg4, NULL);
         fprintf(stderr, "- exec '%s' failed: %s (%d) -\n",
                 cmd, strerror(errno), errno);
         exit(-1);
@@ -254,11 +255,11 @@ static int create_subproc_pty(const char *cmd, const char *arg0, const char *arg
 #endif /* !HAVE_WIN32_PROC */
 }
 
-static int create_subproc_raw(const char *cmd, const char *arg0, const char *arg1, pid_t *pid)
+static int create_subproc_raw(const char *cmd, const char *arg0, const char *arg1, const char *arg2, const char *arg3,  const char *arg4, pid_t *pid)
 {
-    D("create_subproc_raw(cmd=%s, arg0=%s, arg1=%s)\n", cmd, arg0, arg1);
+    D("create_subproc_raw(cmd=%s, arg0=%s, arg1=%s, arg2=%s, arg3=%s, arg4=%s)\n", cmd, arg0, arg1, arg2, arg3, arg4);
 #ifdef HAVE_WIN32_PROC
-    fprintf(stderr, "error: create_subproc_raw not implemented on Win32 (%s %s %s)\n", cmd, arg0, arg1);
+    fprintf(stderr, "error: create_subproc_raw not implemented on Win32 (%s %s %s %s %s %s)\n", cmd, arg0, arg1, arg2, arg3, arg4);
     return -1;
 #else /* !HAVE_WIN32_PROC */
 
@@ -287,7 +288,7 @@ static int create_subproc_raw(const char *cmd, const char *arg0, const char *arg
 
         adb_close(sv[1]);
 
-        execl(cmd, cmd, arg0, arg1, NULL);
+        execl(cmd, cmd, arg0, arg1, arg2, arg3, arg4, NULL);
         fprintf(stderr, "- exec '%s' failed: %s (%d) -\n",
                 cmd, strerror(errno), errno);
         exit(-1);
@@ -301,9 +302,12 @@ static int create_subproc_raw(const char *cmd, const char *arg0, const char *arg
 
 #if ADB_HOST
 #define SHELL_COMMAND "/bin/sh"
+#define ALTERNATE_SHELL_COMMAND ""
 #else
 #define SHELL_COMMAND "/system/bin/sh"
+#define ALTERNATE_SHELL_COMMAND "/sbin/sh"
 #endif
+#define SUDO "/usr/bin/sudo"
 
 #if !ADB_HOST
 static void subproc_waiter_service(int fd, void *cookie)
@@ -344,19 +348,47 @@ static int create_subproc_thread(const char *name, const subproc_mode mode)
     int ret_fd;
     pid_t pid = -1;
 
-    const char *arg0, *arg1;
+    const char* shell_command;
+    struct stat st;
+
+    struct passwd *user = (struct passwd *)getpwuid(getuid());
+    char useropt[256] = "-u";
+    char arg0 [10] = "-";
+    const char *arg1;
     if (name == 0 || *name == 0) {
-        arg0 = "-"; arg1 = 0;
+        arg1 = 0;
     } else {
-        arg0 = "-c"; arg1 = name;
+        strcat(arg0, "c"); arg1 = name;
+    }
+
+    char value[PROPERTY_VALUE_MAX];
+    property_get("persist.sys.adb.shell", value, "");
+    if (user && user->pw_shell && user->pw_name) {
+        shell_command = user->pw_shell;
+        strcat(arg0, "l");
+        if (user->pw_name)
+            strcat(useropt, user->pw_name);
+
+        if (user->pw_dir)
+            if(chdir(user->pw_dir) < 0 )
+                return 1;
+
+    } else if (value[0] != '\0' && stat(value, &st) == 0) {
+        shell_command = value;
+    }
+    else if (stat(ALTERNATE_SHELL_COMMAND, &st) == 0) {
+        shell_command = ALTERNATE_SHELL_COMMAND;
+    }
+    else {
+        shell_command = SHELL_COMMAND;
     }
 
     switch (mode) {
     case SUBPROC_PTY:
-        ret_fd = create_subproc_pty(SHELL_COMMAND, arg0, arg1, &pid);
+        ret_fd = create_subproc_pty(SUDO, useropt, "-i", shell_command, arg0, arg1, &pid);
         break;
     case SUBPROC_RAW:
-        ret_fd = create_subproc_raw(SHELL_COMMAND, arg0, arg1, &pid);
+        ret_fd = create_subproc_raw(SUDO, useropt, "-i", shell_command, arg0, arg1, &pid);
         break;
     default:
         fprintf(stderr, "invalid subproc_mode %d\n", mode);

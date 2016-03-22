@@ -36,11 +36,13 @@
 #if !ADB_HOST
 #include <cutils/properties.h>
 #include <private/android_filesystem_config.h>
-#include <sys/capability.h>
+#include <private/ubuntu_filesystem_config.h>
+#include <linux/capability.h>
 #include <sys/mount.h>
-#include <sys/prctl.h>
+#include <linux/prctl.h>
 #include <getopt.h>
 #include <selinux/selinux.h>
+#include <pwd.h>
 #else
 #include "usb_vendors.h"
 #endif
@@ -1355,12 +1357,17 @@ int adb_main(int is_daemon, int server_port)
     ** AID_SDCARD_RW to allow writing to the SD card
     ** AID_NET_BW_STATS to read out qtaguid statistics
     */
+/*
     gid_t groups[] = { AID_ADB, AID_LOG, AID_INPUT, AID_INET, AID_GRAPHICS,
                        AID_NET_BT, AID_NET_BT_ADMIN, AID_SDCARD_R, AID_SDCARD_RW,
                        AID_NET_BW_STATS };
     if (setgroups(sizeof(groups)/sizeof(groups[0]), groups) != 0) {
         exit(1);
     }
+*/
+    // initialize all default groups for the UBUNTU_PHABLET user
+    struct passwd *pw = getpwuid(UBUNTU_PHABLET);
+    initgroups(pw->pw_name, pw->pw_gid);
 
     /* don't listen on a port (default 5037) if running in secure mode */
     /* don't run as root if we are running in secure mode */
@@ -1368,10 +1375,10 @@ int adb_main(int is_daemon, int server_port)
         drop_capabilities_bounding_set_if_needed();
 
         /* then switch user and group to "shell" */
-        if (setgid(AID_SHELL) != 0) {
+        if (setgid(UBUNTU_PHABLET) != 0) {
             exit(1);
         }
-        if (setuid(AID_SHELL) != 0) {
+        if (setuid(UBUNTU_PHABLET) != 0) {
             exit(1);
         }
 

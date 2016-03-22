@@ -15,6 +15,7 @@
  */
 
 #include <unistd.h>
+#include <linux/reboot.h>
 #include <sys/reboot.h>
 #include <sys/syscall.h>
 #include <sys/types.h>
