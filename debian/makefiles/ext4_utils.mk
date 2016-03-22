@@ -1,6 +1,6 @@
-# Makefile for ext4_utils; based on https://heiher.info/2227.html
-# Author: Dmitrijs Ledkovs <xnox@ubuntu.com>
+# Makefile for ext4_utils; based on ext4_utils/Android.mk
 
+VPATH+= ../../extras/ext4_utils/
 SRCS+=make_ext4fs.c
 SRCS+=ext4fixup.c
 SRCS+=ext4_utils.c
@@ -15,7 +15,7 @@ SRCS+=crc16.c
 SRCS+=ext4_sb.c
 SRCS+=canned_fs_config.c
 
-VPATH+= ../../core/libsparse
+VPATH+= ../libsparse
 SRCS+= backed_block.c
 SRCS+= sparse_crc32.c
 SRCS+= sparse.c
@@ -24,7 +24,7 @@ SRCS+= sparse_err.c
 SRCS+= output_file.c
 
 OBJS_SHARED:= $(SRCS:.c=.o)
-
+VPATH+= ../../extras/ext4_utils/
 SRCS+=make_ext4fs_main.c
 SRCS+=ext4fixup_main.c
 SRCS+=setup_fs.c
@@ -37,8 +37,8 @@ CPPFLAGS+= -DANDROID
 CPPFLAGS+= -DHOST=1
 CPPFLAGS+= -I../../extras/ext4_utils/
 CPPFLAGS+= -I/usr/include
-CPPFLAGS+= -I../../core/include
-CPPFLAGS+= -I../../core/libsparse/include/
+CPPFLAGS+= -I../include
+CPPFLAGS+= -I../libsparse/include/
 
 LIBS+= -lz -lselinux
 

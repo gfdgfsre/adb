@@ -1,1 +1,1 @@
-core/fastboot/fastboot usr/bin/
+core/build_fastboot/fastboot usr/bin/

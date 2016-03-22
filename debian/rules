@@ -14,20 +14,28 @@ INSTALL_PROGRAM = $(INSTALL)
 
 override_dh_clean:
 	dh_clean
-	$(MAKE) -f $(M)/adb.mk -C core/adb clean
+	mkdir -p core/build_adb
+	$(MAKE) -f $(M)/adb.mk -C core/build_adb clean
 ifeq (,$(filter $(DEB_HOST_ARCH),powerpc s390x arm64 ppc64el))
-		$(MAKE) -f $(M)/adbd.mk -C core/adbd clean
+		mkdir -p core/build_adbd
+		$(MAKE) -f $(M)/adbd.mk -C core/build_adbd clean
 endif
-	$(MAKE) -f $(M)/fastboot.mk -C core/fastboot clean
-	$(MAKE) -f $(M)/ext4_utils.mk -C extras/ext4_utils clean
+	mkdir -p core/build_ext4_utils
+	$(MAKE) -f $(M)/ext4_utils.mk -C core/build_ext4_utils clean
+	mkdir -p core/build_fastboot
+	$(MAKE) -f $(M)/fastboot.mk -C core/build_fastboot clean
 
 override_dh_auto_build:
-	$(MAKE) -f $(M)/adb.mk -C core/adb
+	mkdir -p core/build_adb
+	$(MAKE) -f $(M)/adb.mk -C core/build_adb
 ifeq (,$(filter $(DEB_HOST_ARCH),powerpc s390x arm64 ppc64el))
-	$(MAKE) -f $(M)/adbd.mk -C core/adbd
+	mkdir -p core/build_adbd
+	$(MAKE) -f $(M)/adbd.mk -C core/build_adbd
 endif
-	$(MAKE) -f $(M)/fastboot.mk -C core/fastboot
-	$(MAKE) -f $(M)/ext4_utils.mk -C extras/ext4_utils
+	mkdir -p core/build_ext4_utils
+	$(MAKE) -f $(M)/ext4_utils.mk -C core/build_ext4_utils
+	mkdir -p core/build_fastboot
+	$(MAKE) -f $(M)/fastboot.mk -C core/build_fastboot
 
 override_dh_install:
 	dh_install --sourcedir=.
