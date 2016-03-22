@@ -32,4 +32,8 @@ pre-start script
         fi
 end script
 
+post-stop script
+        unlink /dev/socket/adbd
+end script
+
 exec su - -c adbd

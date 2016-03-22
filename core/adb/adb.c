@@ -38,6 +38,7 @@
 #include <private/android_filesystem_config.h>
 #include <private/ubuntu_filesystem_config.h>
 #include <pwd.h>
+#include "ubuntu_sockets.h"
 #include <linux/capability.h>
 #include <sys/mount.h>
 #include <linux/prctl.h>
@@ -1724,6 +1725,8 @@ int main(int argc, char **argv)
             break;
         }
     }
+    // create adb socket here, usually this is done by Android init
+    ubuntu_create_android_control_socket("adbd", SOCK_STREAM, 0660, UBUNTU_PHABLET, UBUNTU_PHABLET);
 
     start_device_log();
     D("Handling main()\n");

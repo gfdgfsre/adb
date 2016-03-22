@@ -33,6 +33,7 @@ SRCS+= sha256.c
 
 VPATH+= ../ubuntu
 SRCS+= selinux_stub.c
+SRCS+= ubuntu_sockets.c
 
 CPPFLAGS+= -O2 -g -Wall -Wno-unused-parameter
 CPPFLAGS+= -DADB_HOST=0 -DHAVE_FORKEXEC=1 -D_XOPEN_SOURCE -D_GNU_SOURCE -DALLOW_ADBD_ROOT=1
@@ -45,7 +46,7 @@ CPPFLAGS+= -I../ubuntu
 CPPFLAGS+= -I../../../external/zlib
 CPPFLAGS+= `pkg-config --cflags glib-2.0 gio-2.0`
 
-LIBS+= -lc -lpthread -lz -lcrypto -landroid-properties -lresolv `pkg-config --libs glib-2.0 gio-2.0`
+LIBS+= -lc -lpthread -lz -lcrypto -landroid-properties -lsystemd -lresolv `pkg-config --libs glib-2.0 gio-2.0`
 
 OBJS= $(patsubst %, %.o, $(basename $(SRCS)))
 
