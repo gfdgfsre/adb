@@ -31,7 +31,8 @@
 #ifdef HAVE_PTHREADS
 #include <pthread.h>
 #endif
-#include <log/uio.h>
+// Removing include, already defined from /usr/include/
+// #include <log/uio.h>
 #include <stdarg.h>
 
 #ifdef __cplusplus

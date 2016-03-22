@@ -37,7 +37,8 @@
 #include <time.h>
 #include <unistd.h>
 #include <log/logd.h>
-#include <log/uio.h>
+// Removing include, already defined from /usr/include/
+// #include <log/uio.h>
 
 #ifdef __cplusplus
 extern "C" {
