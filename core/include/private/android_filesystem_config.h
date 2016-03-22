@@ -213,6 +213,7 @@ static const struct fs_path_config android_dirs[] = {
     { 00755, AID_ROOT,   AID_ROOT,   0, "system/etc/ppp" },
     { 00755, AID_ROOT,   AID_SHELL,  0, "vendor" },
     { 00777, AID_ROOT,   AID_ROOT,   0, "sdcard" },
+    { 00755, AID_ROOT,   AID_ROOT,   0, "system/ubuntu*" },
     { 00755, AID_ROOT,   AID_ROOT,   0, 0 },
 };
 
@@ -266,6 +267,9 @@ static const struct fs_path_config android_files[] = {
     { 00750, AID_ROOT,      AID_SHELL,     0, "init*" },
     { 00750, AID_ROOT,      AID_SHELL,     0, "sbin/fs_mgr" },
     { 00640, AID_ROOT,      AID_SHELL,     0, "fstab.*" },
+    { 00644, AID_ROOT,      AID_ROOT,      0, "system/ubuntu/usr/etc/*" },
+    { 00755, AID_ROOT,      AID_ROOT,      0, "system/ubuntu/usr/bin/*" },
+    { 00644, AID_ROOT,      AID_ROOT,      0, "system/ubuntu/usr/lib/*" },
     { 00644, AID_ROOT,      AID_ROOT,      0, 0 },
 };
 
@@ -297,7 +301,12 @@ static inline void fs_config(const char *path, int dir,
     }
     *uid = pc->uid;
     *gid = pc->gid;
-    *mode = (*mode & (~07777)) | pc->mode;
+    if(!strncmp("system/ubuntu/", path, 14)) {
+        // this is ubuntu overlay, merge with existing host os file permissions
+        *mode = (*mode & (~07000)) | pc->mode;
+    } else {
+        *mode = (*mode & (~07777)) | pc->mode;
+    }
     *capabilities = pc->capabilities;
 
 #if 0

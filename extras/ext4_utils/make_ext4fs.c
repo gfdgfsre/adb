@@ -189,7 +189,7 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 		uint64_t capabilities;
 		if (fs_config_func != NULL) {
 #ifdef ANDROID
-			unsigned int mode = 0;
+			unsigned int mode = 0777 & stat.st_mode;
 			unsigned int uid = 0;
 			unsigned int gid = 0;
 			int dir = S_ISDIR(stat.st_mode);
