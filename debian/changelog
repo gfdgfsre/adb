@@ -1,3 +1,11 @@
+android-tools (5.1.1r36+git20160322-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Upgarde to tools based on Android 5.1.1_r36
+  * Redoing all patches on top to make next upgrade cleaner
+  * fixing missing socket handling
+
+ -- Ondrej Kubik <ondrej.kubik@canonical.com>  Fri, 11 Feb 2016 20:34:19 +0000
+
 android-tools (5.1.1r34+git20160211-0ubuntu3) xenial; urgency=medium
 
   * debian/rules:
