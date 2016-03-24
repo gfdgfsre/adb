@@ -51,6 +51,8 @@
 #define VENDOR_ID_ARCHOS        0x0E79
 // Asus's USB Vendor ID
 #define VENDOR_ID_ASUS          0x0b05
+// BQ's USB Vendor ID
+#define VENDOR_ID_BQ            0x2a47
 // BYD's USB Vendor ID
 #define VENDOR_ID_BYD           0x1D91
 // Compal's USB Vendor ID
@@ -121,6 +123,8 @@
 #define VENDOR_ID_LGE           0x1004
 // Lumigon's USB Vendor ID
 #define VENDOR_ID_LUMIGON       0x25E3
+// Meizu's USB Vendor ID
+#define VENDOR_ID_MEIZU         0x2a45
 // Motorola's USB Vendor ID
 #define VENDOR_ID_MOTOROLA      0x22b8
 // MSI's USB Vendor ID
@@ -206,6 +210,7 @@ int builtInVendorIds[] = {
     VENDOR_ID_ANYDATA,
     VENDOR_ID_ARCHOS,
     VENDOR_ID_ASUS,
+    VENDOR_ID_BQ,
     VENDOR_ID_BYD,
     VENDOR_ID_COMPAL,
     VENDOR_ID_COMPALCOMM,
@@ -241,6 +246,7 @@ int builtInVendorIds[] = {
     VENDOR_ID_LENOVOMOBILE,
     VENDOR_ID_LGE,
     VENDOR_ID_LUMIGON,
+    VENDOR_ID_MEIZU,
     VENDOR_ID_MOTOROLA,
     VENDOR_ID_MSI,
     VENDOR_ID_MTK,

@@ -54,6 +54,7 @@ CPPFLAGS+= -I../../extras/ext4_utils/
 CPPFLAGS+= -I../../extras/f2fs_utils
 CPPFLAGS+= -I../include/f2fs-tools
 CPPFLAGS+= -I../libsparse/include/
+CPPFLAGS+= -I../ubuntu
 LIBS+= -lz -ldl -lselinux
 
 OBJS= $(SRCS:.c=.o)

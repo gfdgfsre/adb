@@ -41,7 +41,7 @@ typedef char bool;
 #define false (const bool)0
 #define true (const bool)1
 
-#define LOG_FILE_DIR "/dev/log/"
+#define LOG_FILE_DIR "/dev/alog/"
 
 /* timeout in milliseconds */
 #define LOG_TIMEOUT_FLUSH 5

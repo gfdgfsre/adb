@@ -57,12 +57,13 @@ static char *find_mount(const char *dir)
         char mount_dir[256];
         int mount_freq;
         int mount_passno;
+        struct stat st;
 
         res = sscanf(token, "%255s %255s %*s %*s %d %d\n",
                      mount_dev, mount_dir, &mount_freq, &mount_passno);
         mount_dev[255] = 0;
         mount_dir[255] = 0;
-        if (res == 4 && (strcmp(dir, mount_dir) == 0))
+        if (res == 4 && (strcmp(dir, mount_dir) == 0) && (stat(mount_dev, &st) == 0))
             return strdup(mount_dev);
 
         token = strtok(NULL, delims);
@@ -147,8 +148,8 @@ void remount_service(int fd, void *cookie)
         write_string(fd, buffer);
     }
 
-    if (remount("/system", &system_ro)) {
-        snprintf(buffer, sizeof(buffer), "remount of system failed: %s\n",strerror(errno));
+    if (remount("/", &system_ro)) {
+        snprintf(buffer, sizeof(buffer), "remount of rootfs failed: %s\n",strerror(errno));
         write_string(fd, buffer);
     }
 

@@ -36,10 +36,10 @@
 #include <log/logd.h>
 #include <log/logger.h>
 
-#define LOGGER_LOG_MAIN		"log/main"
-#define LOGGER_LOG_RADIO	"log/radio"
-#define LOGGER_LOG_EVENTS	"log/events"
-#define LOGGER_LOG_SYSTEM	"log/system"
+#define LOGGER_LOG_MAIN		"alog/main"
+#define LOGGER_LOG_RADIO	"alog/radio"
+#define LOGGER_LOG_EVENTS	"alog/events"
+#define LOGGER_LOG_SYSTEM	"alog/system"
 
 #define LOG_BUF_SIZE 1024
 
@@ -69,7 +69,7 @@ static int log_fds[(int)LOG_ID_MAX] = { -1, -1, -1, -1 };
 
 /*
  * This is used by the C++ code to decide if it should write logs through
- * the C code.  Basically, if /dev/log/... is available, we're running in
+ * the C code.  Basically, if /dev/alog/... is available, we're running in
  * the simulator rather than a desktop tool and want to use the device.
  */
 static enum {

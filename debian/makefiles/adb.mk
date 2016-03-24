@@ -1,5 +1,6 @@
 # Makefile for adb; based on core/adb/Android.mk
 
+VPATH+= ../adb
 SRCS+= adb.c
 SRCS+= console.c
 SRCS+= transport.c

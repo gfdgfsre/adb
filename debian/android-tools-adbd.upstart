@@ -4,7 +4,7 @@
 
 description     "adbd"
 
-start on (android-container persist.sys.usb.config=*adb) and (started lightdm)
+start on ((android-container persist.sys.usb.config=*adb) and (started lightdm)) or (android-container ro.debuggable=1)
 stop on runlevel [06]
 
 normal exit 0 127
@@ -30,6 +30,10 @@ pre-start script
         else
         grep -q qemu /proc/cmdline || { stop; exit 0; }
         fi
+end script
+
+post-stop script
+        unlink /dev/socket/adbd
 end script
 
 exec su - -c adbd
