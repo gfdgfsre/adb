@@ -5,6 +5,7 @@ Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 XSBC-Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
 Uploaders: Loïc Minier <lool@debian.org>,
            Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>
+           Simon Fels <simon.fels@canonical.com>
            Ondrej Kubik <ondrej.kubik@canonical.com>
 Build-Depends: debhelper (>= 9),
                gir1.2-glib-2.0,
