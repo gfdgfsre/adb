@@ -1373,7 +1373,11 @@ int adb_main(int is_daemon, int server_port)
     /* don't listen on a port (default 5037) if running in secure mode */
     /* don't run as root if we are running in secure mode */
     if (should_drop_privileges()) {
-        drop_capabilities_bounding_set_if_needed();
+        // do not drop capabilities, we are already almost ready, just set CAP_DAC_OVERRIDE
+        // drop_capabilities_bounding_set_if_needed();
+        if (prctl(PR_SET_KEEPCAPS, CAP_DAC_OVERRIDE, 0, 0, 0) != 0) {
+            exit(1);
+        }
 
         /* then switch user and group to "shell" */
         if (setgid(UBUNTU_PHABLET) != 0) {
