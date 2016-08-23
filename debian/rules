@@ -16,7 +16,7 @@ override_dh_clean:
 	dh_clean
 	mkdir -p core/build_adb
 	$(MAKE) -f $(M)/adb.mk -C core/build_adb clean
-ifeq (,$(filter $(DEB_HOST_ARCH),powerpc s390x arm64 ppc64el))
+ifeq (,$(filter $(DEB_HOST_ARCH),powerpc s390x ppc64el))
 		mkdir -p core/build_adbd
 		$(MAKE) -f $(M)/adbd.mk -C core/build_adbd clean
 endif
@@ -28,7 +28,7 @@ endif
 override_dh_auto_build:
 	mkdir -p core/build_adb
 	$(MAKE) -f $(M)/adb.mk -C core/build_adb
-ifeq (,$(filter $(DEB_HOST_ARCH),powerpc s390x arm64 ppc64el))
+ifeq (,$(filter $(DEB_HOST_ARCH),powerpc s390x ppc64el))
 	mkdir -p core/build_adbd
 	$(MAKE) -f $(M)/adbd.mk -C core/build_adbd
 endif
