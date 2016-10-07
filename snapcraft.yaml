@@ -1,0 +1,30 @@
+name: android-tools
+version: 5.1.1r36+git20160322-1
+summary: Android Tools
+description: |
+  Android tools including the Android Debug Bridge and various other.
+confinement: devmode
+grade: stable
+
+apps:
+  adb:
+    command: usr/bin/adb
+  adbd:
+    command: usr/bin/adbd
+    daemon: simple
+
+parts:
+  android-tools:
+    plugin: make
+    source: .
+    build-packages:
+      - build-essential
+      - gcc
+      - gir1.2-glib-2.0
+      - libglib2.0-dev
+      - libhybris-dev
+      - libsystemd-dev
+      - libselinux1-dev
+      - libssl-dev
+      - python
+      - zlib1g-dev
