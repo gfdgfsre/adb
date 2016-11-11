@@ -9,9 +9,6 @@ grade: stable
 apps:
   adb:
     command: usr/bin/adb
-  adbd:
-    command: usr/bin/adbd
-    daemon: simple
 
 parts:
   android-tools:
