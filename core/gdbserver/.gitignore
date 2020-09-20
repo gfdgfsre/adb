@@ -1,6 +1,5 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
-build
 *.user
 GPATH
 GRTAGS
@@ -14,7 +13,6 @@ GTAGS
 *.wmf
 
 # Latex
-build
 *.aux
 *.lof
 *.log
