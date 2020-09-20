@@ -26,7 +26,7 @@
 
 // $Id: Utils.cpp 324 2009-03-07 09:42:52Z jeremy $
 
-#include <spdlog/spdlog.h>
+// #include <spdlog/spdlog.h>
 #include <gdb-server/Utils.hpp>
 
 //-----------------------------------------------------------------------------
