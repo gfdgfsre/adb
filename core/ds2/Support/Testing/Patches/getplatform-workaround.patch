@@ -1,0 +1,12 @@
+diff --git a/packages/Python/lldbsuite/test/lldbplatformutil.py b/packages/Python/lldbsuite/test/lldbplatformutil.py
+index 940b01e..f9d5e07 100644
+--- a/packages/Python/lldbsuite/test/lldbplatformutil.py
++++ b/packages/Python/lldbsuite/test/lldbplatformutil.py
+@@ -129,6 +129,7 @@ def getDarwinOSTriples():
+ 
+ def getPlatform():
+     """Returns the target platform which the tests are running on."""
++    return "linux"
+     platform = lldb.DBG.GetSelectedPlatform().GetTriple().split('-')[2]
+     if platform.startswith('freebsd'):
+         platform = 'freebsd'

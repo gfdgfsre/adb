@@ -1,0 +1,13 @@
+diff --git a/packages/Python/lldbsuite/test/dotest.py b/packages/Python/lldbsuite/test/dotest.py
+index d28c5ef..6f04220 100644
+--- a/packages/Python/lldbsuite/test/dotest.py
++++ b/packages/Python/lldbsuite/test/dotest.py
+@@ -1244,6 +1244,8 @@ def run_suite():
+ 
+     target_platform = lldb.DBG.GetSelectedPlatform().GetTriple().split('-')[2]
+ 
++    lldb.DBG.HandleCommand("settings set target.exec-search-paths /tmp/debug-data")
++
+     checkLibcxxSupport()
+     checkLibstdcxxSupport()
+     checkDebugInfoSupport()
