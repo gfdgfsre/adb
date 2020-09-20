@@ -1,0 +1,17 @@
+package(default_visibility = ["//visibility:public"])
+
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
+
+
+cc_library(
+    name = "adb_common",
+    srcs = glob([
+        "adb/*.c",
+    ]),
+    hdrs = glob([
+        "adb/*.h",
+    ]),
+    strip_include_prefix = "adb",
+    deps = [
+    ],
+)
