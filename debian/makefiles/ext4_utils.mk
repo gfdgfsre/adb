@@ -1,6 +1,6 @@
 # Makefile for ext4_utils; based on ext4_utils/Android.mk
 
-VPATH+= ../../extras/ext4_utils/
+VPATH+= ../../thirdparty/ext4_utils/
 SRCS+=make_ext4fs.c
 SRCS+=ext4fixup.c
 SRCS+=ext4_utils.c
@@ -24,7 +24,7 @@ SRCS+= sparse_err.c
 SRCS+= output_file.c
 
 OBJS_SHARED:= $(SRCS:.c=.o)
-VPATH+= ../../extras/ext4_utils/
+VPATH+= ../../thirdparty/ext4_utils/
 SRCS+=make_ext4fs_main.c
 SRCS+=ext4fixup_main.c
 SRCS+=setup_fs.c
@@ -35,7 +35,7 @@ SRCS+=simg2simg.c
 
 CPPFLAGS+= -DANDROID
 CPPFLAGS+= -DHOST=1
-CPPFLAGS+= -I../../extras/ext4_utils/
+CPPFLAGS+= -I../../thirdparty/ext4_utils/
 CPPFLAGS+= -I/usr/include
 CPPFLAGS+= -I../include
 CPPFLAGS+= -I../libsparse/include/
