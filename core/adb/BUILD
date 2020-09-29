@@ -2,6 +2,25 @@ package(default_visibility = ["//visibility:public"])
 
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
 
+PROPAGATED_WINDOWS_DEFINES = []
+
+COPTS = [] + select({
+    "@bazel_tools//src/conditions:windows": [
+        "-D" + define
+        for define in PROPAGATED_WINDOWS_DEFINES
+    ],
+    "//conditions:default": [
+        "-DARROW_USE_GLOG",
+    ],
+})
+
+LINKOPTS = [] + select({
+    "@bazel_tools//src/conditions:windows": [
+        "-DefaultLib:" + "ws2_32.lib",
+    ],
+    "//conditions:default": [
+    ],
+})
 
 cc_library(
     name = "adb",
@@ -25,6 +44,8 @@ cc_library(
     hdrs = glob([
         "*.h",
     ]),
+    copts = COPTS,
+    linkopts = LINKOPTS,
     deps = [
     	"//core/libcutils:adb_transport",
     ],
